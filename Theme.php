@@ -56,6 +56,47 @@ abstract class Theme extends BaseV1\Theme{
                     'label' => 'Nº SNIIC:',
                     'private' => false
                 ],
+                
+                'esfera' => [
+                    'label' => 'Esfera',
+                    'type' => 'select',
+                    'options' => [
+                        'Pública' => 'Pública',
+                        'Privada' => 'Privada'
+                    ]
+                ],
+                
+                'esfera_tipo' => [
+                    'label' => 'Tipo de esfera',
+                    'type' => 'select',
+                    'options' => [
+                        'Federal'           => 'Federal',
+                        'Estadual'          => 'Estadual',
+                        'Municipal'         => 'Municipal',
+                        'Associação'        => 'Associação',
+                        'Empresa'           => 'Empresa',
+                        'Fundação'          => 'Fundação',
+                        'Particular'        => 'Particular',
+                        'Religiosa'         => 'Religiosa',
+                        'Mista'             => 'Mista',
+                        'Entidade Sindical' => 'Entidade Sindical',
+                        'Outra'             => 'Outra',
+                    ],
+                ],
+                
+                'certificado' => [
+                    'label' => 'Títulos e Certificados',
+                    'type' => 'select',
+                    'options' => [
+                        'ONG'   => 'Organização não Governamental (ONG)',
+                        'OSCIP' => 'Organização da Sociedade Civil de Interesse Público (OSCIP)',
+                        'OS'    => 'Organização Social (OS)',
+                        'CEBAS' => 'Certificado de Entidade Beneficente de Assistência Social (CEBAS)',
+                        'UPF'   => 'Certificado de Utilidade Pública Federal (UPF)',
+                        'UPE'   => 'Certificado de Utilidade Pública Estadual (UPE)',
+                        'UPM'   => 'Certificado de Utilidade Pública Municipal (UPM)'
+                    ]
+                ],
 
                 'En_CEP' => [
                     'label' => 'CEP',
