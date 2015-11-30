@@ -26,9 +26,20 @@ abstract class Theme extends BaseV1\Theme{
             }
         });
         
-        $this->enqueueScript('app', 'endereco', 'js/endereco.js');
-        $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
+        $app->hook('view.render(<<*>>):before', function() use($app) {
+            $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
+        });
         
+        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function(){
+            $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
+            $this->part('num-sniic', ['entity' => $this->data->entity]);
+        });
+    }
+    
+    public function includeAngularEntityAssets($entity) {
+        parent::includeAngularEntityAssets($entity);
+        
+        $this->enqueueScript('app', 'entity.controller.agentType', 'js/ng.entity.controller.agentTypes.js', ['entity.app']);
     }
     
     public function register() {
@@ -97,58 +108,6 @@ abstract class Theme extends BaseV1\Theme{
                         'UPM'   => 'Certificado de Utilidade Pública Municipal (UPM)'
                     ]
                 ],
-
-                'En_CEP' => [
-                    'label' => 'CEP',
-                ],
-                'En_Nome_Logradouro' => [
-                    'label' => 'Logradouro',
-                ],
-                'En_Num' => [
-                    'label' => 'Número',
-                ],
-                'En_Complemento' => [
-                    'label' => 'Complemento',
-                ],
-                'En_Bairro' => [
-                    'label' => 'Bairro',
-                ],
-                'En_Municipio' => [
-                    'label' => 'Município',
-                ],
-                'En_Estado' => [
-                    'label' => 'Estado',
-                    'type' => 'select',
-                    'options' => array(
-                        'AC'=>'Acre',
-                        'AL'=>'Alagoas',
-                        'AP'=>'Amapá',
-                        'AM'=>'Amazonas',
-                        'BA'=>'Bahia',
-                        'CE'=>'Ceará',
-                        'DF'=>'Distrito Federal',
-                        'ES'=>'Espírito Santo',
-                        'GO'=>'Goiás',
-                        'MA'=>'Maranhão',
-                        'MT'=>'Mato Grosso',
-                        'MS'=>'Mato Grosso do Sul',
-                        'MG'=>'Minas Gerais',
-                        'PA'=>'Pará',
-                        'PB'=>'Paraíba',
-                        'PR'=>'Paraná',
-                        'PE'=>'Pernambuco',
-                        'PI'=>'Piauí',
-                        'RJ'=>'Rio de Janeiro',
-                        'RN'=>'Rio Grande do Norte',
-                        'RS'=>'Rio Grande do Sul',
-                        'RO'=>'Rondônia',
-                        'RR'=>'Roraima',
-                        'SC'=>'Santa Catarina',
-                        'SP'=>'São Paulo',
-                        'SE'=>'Sergipe',
-                        'TO'=>'Tocantins',
-                    )
-                ],
             ],
 
             'MapasCulturais\Entities\Agent' => [
@@ -171,79 +130,6 @@ abstract class Theme extends BaseV1\Theme{
                     'validations' => [
                         'required' => 'A tipologia deve ser informada.'
                     ]
-                ],
-                'En_CEP' => [
-                    'label' => 'CEP',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Nome_Logradouro' => [
-                    'label' => 'Logradouro',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Num' => [
-                    'label' => 'Número',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Complemento' => [
-                    'label' => 'Complemento',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Bairro' => [
-                    'label' => 'Bairro',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Municipio' => [
-                    'label' => 'Município',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                ],
-                'En_Estado' => [
-                    'label' => 'Estado',
-                    'private' => function(){
-                        return !$this->publicLocation;
-                    },
-                    'type' => 'select',
-
-                    'options' => array(
-                        'AC'=>'Acre',
-                        'AL'=>'Alagoas',
-                        'AP'=>'Amapá',
-                        'AM'=>'Amazonas',
-                        'BA'=>'Bahia',
-                        'CE'=>'Ceará',
-                        'DF'=>'Distrito Federal',
-                        'ES'=>'Espírito Santo',
-                        'GO'=>'Goiás',
-                        'MA'=>'Maranhão',
-                        'MT'=>'Mato Grosso',
-                        'MS'=>'Mato Grosso do Sul',
-                        'MG'=>'Minas Gerais',
-                        'PA'=>'Pará',
-                        'PB'=>'Paraíba',
-                        'PR'=>'Paraná',
-                        'PE'=>'Pernambuco',
-                        'PI'=>'Piauí',
-                        'RJ'=>'Rio de Janeiro',
-                        'RN'=>'Rio Grande do Norte',
-                        'RS'=>'Rio Grande do Sul',
-                        'RO'=>'Rondônia',
-                        'RR'=>'Roraima',
-                        'SC'=>'Santa Catarina',
-                        'SP'=>'São Paulo',
-                        'SE'=>'Sergipe',
-                        'TO'=>'Tocantins',
-                    )
                 ],
             ]
         ];
