@@ -35,7 +35,7 @@ abstract class Theme extends BaseV1\Theme{
             $this->part('num-sniic', ['entity' => $this->data->entity]);
         });
 
-        $app->hook('template(space.<<create|edit|single>>.num-sniic):after', function(){
+        $app->hook('template(space.<<create|edit|single>>.tab-about-service):before', function(){
             $this->part('mais-campos', ['entity' => $this->data->entity]);
         });
     }
