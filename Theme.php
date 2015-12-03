@@ -76,8 +76,8 @@ abstract class Theme extends BaseV1\Theme{
                     'label' => 'Esfera',
                     'type' => 'select',
                     'options' => [
-                        'Pública' => 'Pública',
-                        'Privada' => 'Privada'
+                        'Pública',
+                        'Privada'
                     ]
                 ],
                 
@@ -85,17 +85,18 @@ abstract class Theme extends BaseV1\Theme{
                     'label' => 'Tipo de esfera',
                     'type' => 'select',
                     'options' => [
-                        'Federal'           => 'Federal',
-                        'Estadual'          => 'Estadual',
-                        'Municipal'         => 'Municipal',
-                        'Associação'        => 'Associação',
-                        'Empresa'           => 'Empresa',
-                        'Fundação'          => 'Fundação',
-                        'Particular'        => 'Particular',
-                        'Religiosa'         => 'Religiosa',
-                        'Mista'             => 'Mista',
-                        'Entidade Sindical' => 'Entidade Sindical',
-                        'Outra'             => 'Outra',
+                        'Federal',
+                        'Estadual',
+                        'Distrital',
+                        'Municipal',
+                        'Associação',
+                        'Empresa',
+                        'Fundação',
+                        'Particular',
+                        'Religiosa',
+                        'Mista',
+                        'Entidade Sindical',
+                        'Outra',
                     ],
                 ],
                 
