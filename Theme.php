@@ -76,6 +76,14 @@ abstract class Theme extends BaseV1\Theme{
                     'private' => false
                 ],
                 
+                'cnpj' => [
+                    'label' => 'CNPJ',
+                    'private' => false,
+                    'validations' => [
+                        'v::cnpj()' => 'O CNPJ informado é inválido'
+                    ]
+                ],
+                
                 'esfera' => [
                     'label' => 'Esfera',
                     'type' => 'select',
