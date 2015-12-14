@@ -42,6 +42,21 @@ abstract class Theme extends BaseV1\Theme{
         $app->hook('template(space.<<create|edit|single>>.tab-about-service):before', function(){
             $this->part('mais-campos', ['entity' => $this->data->entity]);
         });
+        
+        // BUSCA POR NÚMERO SNIIC
+        // adiciona o join do metadado
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.join', function(&$joins, $keyword) {
+            $joins .= "
+                LEFT JOIN 
+                        e.__metadata num_sniic 
+                WITH 
+                        num_sniic.key = 'num_sniic'";
+        });
+
+        // filtra pelo valor do keyword
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
+            $where .= "OR lower(num_sniic.value) LIKE lower(:keyword)";
+        });
     }
     
     public function includeAngularEntityAssets($entity) {
@@ -74,6 +89,14 @@ abstract class Theme extends BaseV1\Theme{
                 'num_sniic' => [
                     'label' => 'Nº SNIIC:',
                     'private' => false
+                ],
+                
+                'cnpj' => [
+                    'label' => 'CNPJ',
+                    'private' => false,
+                    'validations' => [
+                        'v::cnpj()' => 'O CNPJ informado é inválido'
+                    ]
                 ],
                 
                 'esfera' => [

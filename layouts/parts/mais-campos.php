@@ -10,4 +10,8 @@
     <?php if($this->isEditable() || $entity->certificado): ?>
         <p class="esfera"><span class="label">Títulos e Certificados: </span><span class="js-editable" data-edit="certificado" data-original-title="Títulos e Certificados"><?php echo $entity->certificado; ?></span></p>
     <?php endif; ?>
+        
+    <?php if($this->isEditable() || $entity->cnpj): ?>
+        <p class="esfera"><span class="label">CNPJ: </span><span class="js-editable" data-edit="cnpj" data-original-title="CNPJ"><?php echo $entity->cnpj; ?></span></p>
+    <?php endif; ?>
 </div>
