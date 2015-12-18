@@ -64,6 +64,12 @@ abstract class Theme extends BaseV1\Theme{
         
         $this->enqueueScript('app', 'entity.controller.agentType', 'js/ng.entity.controller.agentTypes.js', ['entity.app']);
     }
+
+    public function includeOpeningTimeAssets(){
+        $this->jsObject['templateUrl']['spaceOpeningTime'] = $this->asset('js/directives/openingTime.html', false);
+        $this->jsObject['angularAppDependencies'][] = 'entity.directive.openingTime';
+        $this->enqueueScript('app', 'entity.directive.openingTime', 'js/ng.entity.directive.openingTime.js', array('ng-mapasculturais'));
+    }
     
     public function register() {
         parent::register();
