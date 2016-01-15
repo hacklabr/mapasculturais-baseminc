@@ -57,6 +57,22 @@ abstract class Theme extends BaseV1\Theme{
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
             $where .= "OR lower(num_sniic.value) LIKE lower(:keyword)";
         });
+        
+        // BUSCA POR NÚMERO MUNICIPIO
+        // adiciona o join do metadado
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.join', function(&$joins, $keyword) {
+            $joins .= "
+                LEFT JOIN 
+                        e.__metadata En_Municipio 
+                WITH 
+                        En_Municipio.key = 'En_Municipio'";
+        });
+
+        // filtra pelo valor do keyword
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
+            $where .= "OR lower(En_Municipio.value) LIKE lower(:keyword)";
+        });
+        
     }
     
     public function includeAngularEntityAssets($entity) {
